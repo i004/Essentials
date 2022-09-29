@@ -1,7 +1,7 @@
 {
   "name": "essentials",
   "version": "1.0.0",
-  "description": "All most-needed features and quality-of-life utilities in one bot.",
+  "description": "A discord bot with community management, utilities and other quality of life features.",
   "main": "index.js",
   "scripts": {
     "start": "ts-node index"
