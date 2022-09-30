@@ -3,12 +3,13 @@ import { Handler } from '../common';
 import { internal } from "../util";
 import { UserError } from "./external";
 import { _buttons } from "./module";
+import { CommandManager } from '../managers';
 
 export class InteractionHandler implements Handler<'interactionCreate'> {
 
   // TODO: types
   // TODO: command manager
-  constructor (private readonly commands: any[]) {}
+  constructor (private readonly commands: CommandManager) {}
 
   public async handle (interaction: Interaction<any>): Promise<void> {
 
@@ -48,7 +49,8 @@ export class InteractionHandler implements Handler<'interactionCreate'> {
   }
 
   private async interactCommand (interaction: CommandInteraction): Promise<void> {
-      const response = await this.commands[interaction.commandId].run(interaction);
+    const command = this.commands.get(interaction.commandId);
+      const response = await .run(interaction);
 
       if (!response) return;
 
@@ -57,7 +59,7 @@ export class InteractionHandler implements Handler<'interactionCreate'> {
   }
 
   private async interactAutocomplete (interaction: AutocompleteInteraction): Promise<void> {
-    const fn = Reflect.get((this.commands[interaction.commandId] as any).proto, 'command:autocomplete');
+    const fn = Reflect.get((this.commands.get(interaction.commandId) as any).proto, 'command:autocomplete');
     const focused = interaction.options.getFocused(true);
 
     if (!fn || !fn[focused.name]) return;

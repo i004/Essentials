@@ -2,7 +2,7 @@ import { ApplicationCommand, ApplicationCommandManager, ChatInputApplicationComm
 // TODO: import from lodash
 import isEqual from 'fast-deep-equal';
 import { readFile, writeFile } from 'node:fs/promises';
-import { Command } from '../command';
+import { Command } from '../interfaces';
 import { CommandType } from '../enums';
 
 // TODO: import from lodash
@@ -10,11 +10,15 @@ const kebabize = (s: string) => s.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (x, o) => (o
 
 type CommandData = ChatInputApplicationCommandData & { guildId?: Snowflake };
 
-export abstract class CommandManager {
+export class CommandManager {
 
   private storage = new Map<string, Command>()
 
   constructor (private readonly commands: ApplicationCommandManager) {}
+
+  public get(id: string): Command {
+    return this.storage.get(id);
+  }
 
   public async registerCommands (commands: object[]) {
 
