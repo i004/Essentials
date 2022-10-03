@@ -1,41 +1,17 @@
 import { ApplicationCommandOptionChoiceData,
-         AutocompleteFocusedOption,
-         Awaitable,
-         ChannelType,
-         CommandOptionChoiceResolvableType,
-         CommandOptionNonChoiceResolvableType,
-         CommandOptionNumericResolvableType,
-         LocalizationMap } from "discord.js";
+  AutocompleteFocusedOption,
+  Awaitable,
+  ChannelType,
+  CommandOptionChoiceResolvableType,
+  CommandOptionNonChoiceResolvableType,
+  CommandOptionNumericResolvableType,
+  LocalizationMap } from "discord.js";
 
 import { OptionType } from "./enums";
 
+// eslint-disable-next-line
 export type AutocompleteOptionCallback = (focused: AutocompleteFocusedOption) => Awaitable<ApplicationCommandOptionChoiceData[]>;
 
-export interface OptionBase {
-    name: string;
-    nameLocalizations?: LocalizationMap;
-    description: string;
-    descriptionLocalizations?: LocalizationMap;
-    required?: boolean;
-    autocomplete?: never;
-}
-
-export interface CommandChannelOption extends OptionBase {
-    type: OptionType.Channel;
-    channelTypes?: ChannelType[];
-}
-
-export interface CommandRoleOption extends OptionBase {
-    type: OptionType.Role;
-}
-
-export interface CommandUserOption extends OptionBase {
-    type: OptionType.User;
-}
-
-export interface CommandMentionableOption extends OptionBase {
-    type: OptionType.Mentionable;
-}
 
 export interface CommandAttachmentOption extends OptionBase {
     type: OptionType.Attachment;
@@ -115,7 +91,8 @@ export type CommandOption =
 
 export type OptionOf<T extends OptionType> =
       T extends OptionType.SubcommandGroup ? CommandSubGroup
-    : T extends OptionType.Number | OptionType.Integer ? CommandNumericOption | CommandAutocompleteNumericOption
+    : T extends OptionType.Number | OptionType.Integer
+        ? CommandNumericOption | CommandAutocompleteNumericOption
     : T extends OptionType.String ? CommandStringOption | CommandAutocompleteStringOption
     : T extends OptionType.Mentionable ? CommandRoleOption | CommandUserOption
     : T extends OptionType.Channel ? CommandChannelOption

@@ -4,7 +4,8 @@
   "description": "A discord bot with community management, utilities and other quality of life features.",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index"
+    "start": "ts-node index",
+    "lint": "eslint framework commands --fix"
   },
   "author": "instance004",
   "license": "MIT",
@@ -34,6 +35,10 @@
     "unidecode": "^0.1.8"
   },
   "devDependencies": {
-    "@types/unidecode": "^0.1.1"
+    "@types/unidecode": "^0.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "eslint": "^8.24.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-unused-imports": "^2.0.0"
   }
 }
