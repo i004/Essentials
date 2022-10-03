@@ -1,4 +1,9 @@
-import { AutocompleteInteraction, ButtonInteraction, CommandInteraction, Interaction } from 'discord.js';
+import {
+  AutocompleteInteraction,
+  ButtonInteraction,
+  CommandInteraction,
+  Interaction
+} from 'discord.js';
 import { Handler } from '../interfaces';
 import { internal } from "../../util";
 import { UserError } from "../external";
@@ -13,7 +18,7 @@ export class InteractionHandler implements Handler<'interactionCreate'> {
         private readonly commands: CommandManager
   ) {}
 
-  public async handle (interaction: Interaction<any>): Promise<void> {
+  public async handle (interaction: Interaction): Promise<void> {
     try {
       if (interaction.isCommand() && interaction.commandId in this.commands)
         await this.interactCommand(interaction);
@@ -30,6 +35,7 @@ export class InteractionHandler implements Handler<'interactionCreate'> {
           }]
         });
       else {
+        // eslint-disable-next-line
         console.error(err);
 
         await internal.forceReply(interaction, {
@@ -50,8 +56,13 @@ export class InteractionHandler implements Handler<'interactionCreate'> {
     await internal.forceReply(interaction, response);
   }
 
-  private async interactAutocomplete (interaction: AutocompleteInteraction): Promise<void> {
-    const fn = Reflect.get((this.commands.get(interaction.commandId) as any).proto, 'command:autocomplete');
+  private async interactAutocomplete (
+    interaction: AutocompleteInteraction
+  ): Promise<void> {
+    const fn = Reflect.get(
+      (this.commands.get(interaction.commandId) as any).proto,
+      'command:autocomplete'
+    );
     const focused = interaction.options.getFocused(true);
 
     if (!fn || !fn[focused.name]) return;

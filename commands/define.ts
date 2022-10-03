@@ -5,22 +5,22 @@ import { TextChannel } from "discord.js";
 const blacklist = /(n[i1]gg?(as?|ers?))|(faggot)/gi;
 
 export default class Define implements Command {
-    @describe('urban dictionary lookup')
-    @option(OptionType.String, 'term', {
-      description: 'The term you want to lookup',
-      autocomplete: async ({ value }) => {
-        if (!value.trim())
-          return [];
+  @describe('urban dictionary lookup')
+  @option(OptionType.String, 'term', {
+    description: 'The term you want to lookup',
+    autocomplete: async ({ value }) => {
+      if (!value.trim())
+        return [];
 
-        return (await UrbanDictionary.autocomplete(value))
-          .slice(0, 8)
-          .filter((x) => !blacklist.test(x.term) && !blacklist.test(x.preview))
-          .map(({ preview, term }) => ({
-            name: limitLength(`${term} ▪️ ${preview}`, 75),
-            value: term
-          }));
-      }
-    })
+      return (await UrbanDictionary.autocomplete(value))
+        .slice(0, 8)
+        .filter((x) => !blacklist.test(x.term) && !blacklist.test(x.preview))
+        .map(({ preview, term }) => ({
+          name: limitLength(`${term} ▪️ ${preview}`, 75),
+          value: term
+        }));
+    }
+  })
   async run (i: CommandInteraction) {
     const list = await UrbanDictionary.define(i.options.getString('term'));
 

@@ -1,13 +1,28 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, EmbedBuilder, SnowflakeUtil } from "discord.js";
-import { Command, CommandInteraction, OptionType, UserError, button, describe, option } from "../framework";
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonInteraction,
+  ButtonStyle,
+  EmbedBuilder,
+  SnowflakeUtil
+} from "discord.js";
+import {
+  Command,
+  CommandInteraction,
+  OptionType,
+  UserError,
+  button,
+  describe,
+  option
+} from "../framework";
 
 export default class Id implements Command {
-    @describe('Information about a Discord snowflake')
-    @option(OptionType.String, 'id', {
-      description: 'Snowflake',
-      minLength: 8,
-      maxLength: 22
-    })
+  @describe('Information about a Discord snowflake')
+  @option(OptionType.String, 'id', {
+    description: 'Snowflake',
+    minLength: 8,
+    maxLength: 22
+  })
   async run (i: CommandInteraction) {
     const id = i.options.getString('id').replace(/[^\d]/g, '');
 
@@ -41,8 +56,8 @@ export default class Id implements Command {
     });
   }
 
-    @button('lookup:{}')
-    async lookup (i: ButtonInteraction, id: string) {
-      await i.reply({ content: `test ${id}` });
-    }
+  @button('lookup:{}')
+  async lookup (i: ButtonInteraction, id: string) {
+    await i.reply({ content: `test ${id}` });
+  }
 }

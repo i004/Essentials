@@ -1,11 +1,9 @@
 import { ApplicationCommandOptionChoiceData,
   AutocompleteFocusedOption,
   Awaitable,
-  ChannelType,
   CommandOptionChoiceResolvableType,
   CommandOptionNonChoiceResolvableType,
-  CommandOptionNumericResolvableType,
-  LocalizationMap } from "discord.js";
+  CommandOptionNumericResolvableType } from "discord.js";
 
 import { OptionType } from "./enums";
 

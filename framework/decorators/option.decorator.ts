@@ -1,7 +1,11 @@
 import { OptionType } from "../enums";
 import { OptionOf } from "../types";
 
-export function option <T extends OptionType> (type: T, name: string, data?: Partial<Omit<OptionOf<T>, 'name' | 'type'>>) {
+export function option <T extends OptionType> (
+  type: T,
+  name: string,
+  data?: Partial<Omit<OptionOf<T>, 'name' | 'type'>>
+) {
   return function ({ constructor: t }, _, __) {
     if (!Reflect.has(t, 'command:options'))
       Reflect.set(t, 'command:options', []);
@@ -17,7 +21,8 @@ export function option <T extends OptionType> (type: T, name: string, data?: Par
       type,
       name,
       description: 'No description provided',
-      required: type == OptionType.Subcommand || type == OptionType.SubcommandGroup ? undefined : true,
+      required: (type === OptionType.Subcommand
+                 || type === OptionType.SubcommandGroup) ? undefined : true,
       nameLocalizations: null,
       descriptionLocalizations: null,
       ...(data || {}),
