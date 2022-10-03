@@ -2,6 +2,7 @@ import { ClientOptions, Client as dClient } from "discord.js";
 import { InteractionHandler } from './handlers';
 import { CommandManager } from './managers';
 import { _events } from "./module";
+import { Type } from './interfaces';
 
 export default class Client extends dClient {
 
@@ -16,6 +17,10 @@ export default class Client extends dClient {
     this.subscribeEvents();
   }
 
+
+  async registerCommands (commands: Type<any>[]): Promise<void> {
+    await this.commands.registerCommands(commands);
+  }
 
   private subscribeHandlers (): void {
     const interactionHandler = new InteractionHandler(this.commands);

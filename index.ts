@@ -10,15 +10,14 @@ void async function () {
   const matches = await promisify(glob)('commands/*.ts');
   const commands = matches.map((x) => require(`./${x}`).default);
 
-  new Client({
+  const client = new Client({
     intents: [ Intent.Guilds ],
     allowedMentions: { parse: [] }
+  });
+  client.on('ready', async () => {
+    await client.registerCommands(commands);    
   })
-    .on('ready', () => {
-      console.log('Ready!');
-    })
-    .registerCommands(commands)
-    .login(token);
+  client.login(token);
 } ();
 
 process.on('uncaughtException', (err) => console.error(err));
