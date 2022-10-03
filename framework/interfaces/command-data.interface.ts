@@ -1,3 +1,3 @@
 import { ChatInputApplicationCommandData, Snowflake } from 'discord.js';
 
-type CommandData = ChatInputApplicationCommandData & { guildId?: Snowflake };
+export type CommandData = ChatInputApplicationCommandData & { guildId?: Snowflake };

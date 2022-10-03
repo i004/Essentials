@@ -1,35 +1,31 @@
 import { Client as dClient, ClientOptions } from "discord.js";
-import { Command } from "./command";
-import { readFile, writeFile } from 'fs/promises';
-import { UserError } from "./external";
-import { internal } from "../util";
 import { _buttons, _events } from "./module";
 import { InteractionHandler } from './handlers';
 import { CommandManager } from './managers';
 
 export default class Client extends dClient {
 
-  private readonly commands: CommandManager;
+    private readonly commands: CommandManager;
 
-  constructor (options: ClientOptions) {
-    super(options);
+    constructor (options: ClientOptions) {
+        super(options);
 
-    this.commands = new CommandManager(this.application.commands);
+        this.commands = new CommandManager(this.application.commands);
 
-    this.subscribeHandlers();
-    this.subscribeEvents();
-  }
-
-
-  private subscribeHandlers (): void {
-    const interactionHandler = new InteractionHandler(this.commands);
-    this.on('interactionCreate', interactionHandler.handle.bind(interactionHandler));
-  }
-
-  private subscribeEvents (): void {
-    for (const event in _events) {
-      const fn = _events[event];
-      this.on(event, fn.bind(fn));
+        this.subscribeHandlers();
+        this.subscribeEvents();
     }
-  }
+
+
+    private subscribeHandlers (): void {
+        const interactionHandler = new InteractionHandler(this.commands);
+        this.on('interactionCreate', interactionHandler.handle.bind(interactionHandler));
+    }
+
+    private subscribeEvents (): void {
+        for (const event in _events) {
+            const fn = _events[event];
+            this.on(event, fn.bind(fn));
+        }
+    }
 }
