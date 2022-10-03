@@ -1,4 +1,4 @@
-import { APIEmbed, EmbedBuilder, Interaction, InteractionReplyOptions } from "discord.js";
+import { APIEmbed, CommandInteraction, EmbedBuilder, Interaction, InteractionReplyOptions } from "discord.js";
 import hash from 'object-hash';
 
 export function errorEmbed (text: string): APIEmbed {
@@ -8,7 +8,7 @@ export function errorEmbed (text: string): APIEmbed {
         .data;
 }
 
-export async function forceReply (interaction: Interaction, data: string | InteractionReplyOptions) {
+export async function forceReply (interaction: CommandInteraction | Interaction, data: string | InteractionReplyOptions) {
     if (!interaction.isRepliable())
         return false;
     

@@ -12,16 +12,17 @@ type CommandData = ChatInputApplicationCommandData & { guildId?: Snowflake };
 
 export class CommandManager {
 
-    private storage = new Map<string, Command>()
+    private storage = new Map<Snowflake, Command>()
 
-    constructor (private readonly commands: ApplicationCommandManager) {}
+    constructor (
+        private readonly commands: ApplicationCommandManager
+    ) {}
 
-    public get(id: string): Command {
+    public get(id: Snowflake): Command {
         return this.storage.get(id);
     }
 
     public async registerCommands (commands: object[]) {
-
         const file = await readFile(`${__dirname}/_command-cache.json`, 'utf-8');
         const commandCache = JSON.parse(file);
 
