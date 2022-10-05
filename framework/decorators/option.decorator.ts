@@ -1,10 +1,17 @@
 import { OptionType } from "../enums";
-import { OptionOf } from "../types";
+import {
+  AutocompleteOptionCallback
+} from "../interfaces/autocomplete-callback.interface";
+import { OptionOf } from "../interfaces/option-of";
 
 export function option <T extends OptionType> (
   type: T,
   name: string,
-  data?: Partial<Omit<OptionOf<T>, 'name' | 'type'>>
+  data?: Partial<
+    Omit<OptionOf<T>, 'name' | 'type' | 'autocomplete'> & {
+      autocomplete: AutocompleteOptionCallback
+    }
+  >
 ) {
   return function ({ constructor: t }, _, __) {
     if (!Reflect.has(t, 'command:options'))

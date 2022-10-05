@@ -4,6 +4,5 @@ export * from './handlers';
 export * from './interfaces';
 export * from './managers';
 export * from './external';
-export * from './types';
 export { default as Client } from './client';
 export { button, on } from './module';
