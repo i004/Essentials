@@ -1,0 +1,12 @@
+{
+  "name": "@essentials/utils",
+  "version": "0.0.1",
+  "description": "Will be depricated (useless package) (@essentials/utils)",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@essentials/core": "0.0.1"
+  }
+}

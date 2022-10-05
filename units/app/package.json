@@ -1,0 +1,21 @@
+{
+  "name": "@units/app",
+  "version": "0.0.1",
+  "description": "Powerfull discord bot",
+  "main": "src/main",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/instance004/Essentials.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/instance004/Essentials/issues"
+  },
+  "homepage": "https://github.com/instance004/Essentials#readme",
+  "dependencies": {
+    "@essentials/core": "0.0.1"
+  }
+}
