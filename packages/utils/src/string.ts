@@ -1,21 +1,5 @@
 /* eslint-disable no-param-reassign */
 
-// TODO: use "pretty-bytes" package from npm
-export function prettyBytes (n: number) {
-  const units = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
-  const negative = n < 0,
-    prefix = negative ? '-' : '';
-
-  if (negative) n = -n;
-  if (n >= 0 && n < 1)
-    return `${Number(n.toPrecision(3)).toLocaleString()} ${units[0]}`;
-
-  const exponent = Math.min(Math.floor(Math.log10(n) / 3), units.length - 1);
-  n /= 1000 ** exponent;
-
-  return `${prefix}${Number(n.toPrecision(3)).toLocaleString()} ${units[exponent]}`;
-}
 
 // TODO: move to units/app (utils/progressbar.util.ts)
 export function progressbar (percent: number, width = 5) {
@@ -38,11 +22,4 @@ export function progressbar (percent: number, width = 5) {
     + emojis[2].repeat(empty)
     + (fill >= width ? emojis[5] : emojis[4])
   );
-}
-
-// TODO: use "truncate" package from npm
-export function limitLength (str: string, maxLength: number): string {
-  return str.length > maxLength
-    ? str.slice(0, maxLength - 1) + "…"
-    : str;
 }

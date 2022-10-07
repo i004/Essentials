@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { Client, Intent } from "@essentials/core";
 import { token } from './config.json';
+import prettyBytes from 'pretty-bytes'
 import * as commands from './commands';
 
 const client = new Client({
