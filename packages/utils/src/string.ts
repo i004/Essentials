@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 // TODO: use "pretty-bytes" package from npm
-export function prettyBytes(n: number) {
+export function prettyBytes (n: number) {
   const units = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
   const negative = n < 0,
@@ -18,7 +18,7 @@ export function prettyBytes(n: number) {
 }
 
 // TODO: move to units/app (utils/progressbar.util.ts)
-export function progressbar(percent: number, width = 5) {
+export function progressbar (percent: number, width = 5) {
   const emojis = [
     '<:l0:1019961767008407633>',
     '<:l1:1019961772406489160>',
@@ -41,7 +41,7 @@ export function progressbar(percent: number, width = 5) {
 }
 
 // TODO: use "truncate" package from npm
-export function limitLength(str: string, maxLength: number): string {
+export function limitLength (str: string, maxLength: number): string {
   return str.length > maxLength
     ? str.slice(0, maxLength - 1) + "…"
     : str;

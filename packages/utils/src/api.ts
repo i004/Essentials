@@ -1,22 +1,24 @@
+import needle, { NeedleOptions, NeedleResponse } from 'needle';
 
-// DEPRICATED? TODO: use an external library for cached requests
+// TODO: use an external library for cached requests
 
-// export async function fetch (
-//   url: string,
-//   options?: FetchOptions
-// ): Promise<NeedleResponse> { 
-//   if (options?.cache && fetchCache.has(url))
-//     return fetchCache.get(url);
+type FetchOptions = NeedleOptions & { cache: boolean };
 
-//   const req = await needle('get', url, options);
+export async function fetch (
+  url: string,
+  options?: FetchOptions
+): Promise<NeedleResponse> { 
+  if (options?.cache && fetchCache.has(url))
+    return fetchCache.get(url);
 
-//   if (options?.cache && req.statusCode === 200)
-//     fetchCache.store(url, req);
+  const req = await needle('get', url, options);
 
-//   return req;
-// }
+  if (options?.cache && req.statusCode === 200)
+    fetchCache.store(url, req);
 
-// TODO: use "mathjs" package from npm
+  return req;
+}
+
 export async function mathjs (expr: string): Promise<string> {
   const req = await fetch(`https://api.mathjs.org/v4/?expr=${encodeURIComponent(expr)}`, {
     cache: true
@@ -29,7 +31,6 @@ export async function mathjs (expr: string): Promise<string> {
   return  req.body.toString();
 }
 
-// TODO: use "urban-dictionary" package from npm
 export class UrbanDictionary {
 
   static async autocomplete (term: string): Promise<{ term: string, preview: string }[]> {
@@ -64,7 +65,6 @@ export class UrbanDictionary {
   }
 }
 
-// TODO: use "wolfram-alpha-api" package from npm
 export class WolframAlpha {
 
   static async result (query: string): Promise<string> {
