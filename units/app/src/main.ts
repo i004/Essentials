@@ -1,8 +1,11 @@
 /* eslint-disable no-console */
 import { Client, Intent } from "@essentials/core";
+import { ConsoleLogger } from "@essentials/common";
 import { token } from './config.json';
 import prettyBytes from 'pretty-bytes'
 import * as commands from './commands';
+
+const logger = new ConsoleLogger();
 
 const client = new Client({
   intents: [ Intent.Guilds ],
@@ -18,5 +21,5 @@ client.login(token);
 
 
 // TODO: custom logger
-process.on('uncaughtException', (err) => console.error(err));
-process.on('unhandledRejection', (err) => console.error(err));
+process.on('uncaughtException', (err) => logger.error(err.toString()));
+process.on('unhandledRejection', (err) => logger.error(err.toString()));
