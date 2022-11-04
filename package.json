@@ -4,7 +4,8 @@
   "description": "A discord bot with community management, utilities and other quality of life features.",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index"
+    "start": "ts-node index",
+    "lint": "lerna run --parallel lint"
   },
   "author": "instance004",
   "license": "MIT",
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/instance004/Essentials#readme",
   "dependencies": {
+    "discord.js": "^14.3.0"
     "@types/glob": "^8.0.0",
     "@types/needle": "^2.5.3",
     "@types/object-hash": "^2.2.1",
@@ -36,6 +38,11 @@
     "unidecode": "^0.1.8"
   },
   "devDependencies": {
-    "@types/unidecode": "^0.1.1"
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "eslint": "^8.24.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "lerna": "^5.1.4",
+    "ts-node": "^10.9.1"
   }
 }

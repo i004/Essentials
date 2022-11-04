@@ -1,0 +1,18 @@
+{
+  "name": "@essentials/common",
+  "version": "0.0.1",
+  "description": "Essentials - powerfull discord bot framework built on discord.js (@essentials/common)",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/instance004/Essentials.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/instance004/Essentials/issues"
+  },
+  "homepage": "https://github.com/instance004/Essentials#readme"
+}
